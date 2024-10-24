@@ -15,34 +15,96 @@ class DrawerScreen extends StatelessWidget {
       ),
       body: Container(
         color: Color(0xff243945),
+        padding: EdgeInsets.all(20),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            /* Container(
-              alignment: Alignment.center,
-              height: 50,
-              child: Icon(Icons.pets,size: 60,),
-            ), */
-            Flexible(
-              child: Container(
-                padding: EdgeInsets.only(left:10),
-                height: 300,
-                margin: EdgeInsets.only(bottom: 5),
-                child: Row(
-                  children: [
-                    Container(
-                      width: 300,
-                      height: double.infinity,
-                      alignment: Alignment.center,
-                      padding: EdgeInsets.all(15),
-                      /* child: Text(
-                        '',
-                        style: TextStyle(color: Colors.black87,fontSize: 18),
-                      ), */
-                    )
-                  ],
+            Center(
+              child: Text(
+                "Inicio",
+                style: TextStyle(
+                  fontSize: 40,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.tealAccent,
                 ),
-              )),
-              
+              ),
+            ),
+            SizedBox(height: 20),
+            Text(
+              "Filtro",
+              style: TextStyle(fontSize: 25, color: Colors.tealAccent),
+            ),
+            SizedBox(height: 10),
+            Row(
+              children: [
+                Expanded(
+                  child: TextFormField(
+                    decoration: InputDecoration(
+                      labelText: 'Carrera',
+                      filled: true,
+                      fillColor: Colors.white,
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(width: 10),
+                Expanded(
+                  child: TextFormField(
+                    decoration: InputDecoration(
+                      labelText: 'Ramo',
+                      filled: true,
+                      fillColor: Colors.white,
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(height: 10),
+            TextFormField(
+              decoration: InputDecoration(
+                labelText: 'Paralelo',
+                filled: true,
+                fillColor: Colors.white,
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+              ),
+            ),
+            SizedBox(height: 10),
+            Align(
+              alignment: Alignment.centerRight,
+              child: FloatingActionButton(
+                onPressed: () {
+                  // Proceso de filtracion
+                },
+                backgroundColor: Colors.purple,
+                child: Text('Filtrar'),
+              ),
+            ),
+            SizedBox(height: 20),
+            // Seccion de correos a poner
+            Expanded(
+              child: ListView.builder(
+                itemCount: 4, 
+                itemBuilder: (context, index) {
+                  return CheckboxListTile(
+                    value: true, // Cambiar a false para desmarcar
+                    onChanged: (value) {},
+                    title: Text(
+                      'Correo',
+                      style: TextStyle(color: Colors.white),
+                    ),
+                    controlAffinity: ListTileControlAffinity.leading,
+                    activeColor: Colors.purple,
+                  );
+                },
+              ),
+            ),
           ],
         ),
       ),
