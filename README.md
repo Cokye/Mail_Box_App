@@ -13,3 +13,7 @@ El login de este proyecto esta hecho con un paquete de flutter y para eso hace f
 
 `$ pip install dart`
 `$ pip install flutter`
+
+#### Iconos
+`$ flutter pub add material_symbols_icons`
+
