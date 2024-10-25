@@ -24,7 +24,7 @@ class DrawerPerfil extends StatelessWidget {
                 child: IconButton(
                   icon: const Icon(Icons.camera_alt, color: Colors.white),
                   onPressed: () {
-                    // Aquí puedes agregar la funcionalidad de subir una foto
+                    //agregar la funcionalidad de subir una foto
                   },
                 ),
               ),
@@ -86,7 +86,7 @@ class DrawerPerfil extends StatelessWidget {
             Center(
               child: ElevatedButton(
                 onPressed: () {
-                  // Aquí puedes agregar la funcionalidad para guardar los cambios
+                  //agregar la funcionalidad para guardar los cambios
                   ScaffoldMessenger.of(context).showSnackBar(
                     const SnackBar(content: Text('Cambios guardados')),
                   );

@@ -54,8 +54,8 @@ class LoginScreen extends StatelessWidget {
       },
       onRecoverPassword: _recoverPassword,
       theme: LoginTheme(
-        primaryColor: Color(0xff243945), // Cambia el color primario según tu diseño
-        accentColor: Color(0xff3b8d9e), // Cambia el color de acento si lo deseas
+        primaryColor: Color(0xff243945), 
+        accentColor: Color(0xff3b8d9e), 
       ),
     );
   }
