@@ -12,6 +12,7 @@ dependencies:
   flutter_login: ^5.0.0
   flutter_material_design_icons: ^1.1.7447
   http: ^1.2.2
+  material_symbols_icons: ^4.2789.0
 
 dev_dependencies:
   flutter_test:

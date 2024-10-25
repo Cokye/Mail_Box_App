@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_login/flutter_login.dart';
 import 'package:mail_box_app/screens/drawer_screen.dart';
-import 'package:mail_box_app/screens/main_screen.dart';
 
 const users = {
   'admin@gmail.com': 'admin',
