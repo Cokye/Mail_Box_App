@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
+import 'package:mail_box_app/screens/correos_agregar.dart';
 import 'package:mail_box_app/screens/drawer_perfil.dart';
-import 'package:mail_box_app/screens/drawer_redactar.dart';
 
 class DrawerScreen extends StatelessWidget {
   const DrawerScreen({super.key});
@@ -87,10 +87,9 @@ class DrawerScreen extends StatelessWidget {
               ),
             ),
             SizedBox(height: 20),
-            // Seccion de correos a poner
             Expanded(
               child: ListView.builder(
-                itemCount: 4, 
+                itemCount: 4,
                 itemBuilder: (context, index) {
                   return CheckboxListTile(
                     value: true, // Cambiar a false para desmarcar
@@ -109,65 +108,76 @@ class DrawerScreen extends StatelessWidget {
         ),
       ),
       drawer: Drawer(
-        child: ListView(
-          children: [
-            DrawerHeader(
-              child: Column(
-                children: [
-                  Container(
-                    height: 100,
-                    width: 100,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      image: DecorationImage(
-                      image: AssetImage('assets/images/perro_perfil.jpg'),
-                      ), border: Border.all(width: 2.0,color: Color(0xff541643))
+        child: Container(
+          color: Color.fromARGB(200, 59, 142, 158), 
+          child: ListView(
+            children: [
+              DrawerHeader(
+                child: Column(
+                  children: [
+                    Container(
+                      height: 100,
+                      width: 100,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        image: DecorationImage(
+                          image: AssetImage('assets/images/Usuario_perfil.png'),
+                        ),
+                        border: Border.all(width: 2.0, color: Color(0xff541643)),
+                      ),
                     ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(5.0),
-                    child: Text("Nombre",style: TextStyle(fontSize: 17),),
+                    Padding(
+                      padding: const EdgeInsets.all(5.0),
+                      child: Text(
+                        "Nombre",
+                        style: TextStyle(fontSize: 17, color: Colors.white),
+                      ),
                     )
-                ],
-              )),
+                  ],
+                ),
+              ),
               ListTile(
-                title: Text('Perfil'),
+                title: Text(
+                  'Perfil',
+                  style: TextStyle(color: Colors.white),
+                ),
                 leading: Icon(
                   MdiIcons.faceMan,
-                  color: Colors.black,
+                  color: Colors.white,
                 ),
-                onTap: () => _navegar(context,1) ,
-
+                onTap: () => _navegar(context, 1),
               ),
-              Divider(),
+              Divider(color: Colors.white),
               ListTile(
-                title: Text('Redactar Correo'),
+                title: Text(
+                  'Redactar Correo',
+                  style: TextStyle(color: Colors.white),
+                ),
                 leading: Icon(
                   MdiIcons.messageDraw,
-                  color: Colors.black,
+                  color: Colors.white,
                 ),
-                onTap: () => _navegar(context,2) ,
-
+                onTap: () => _navegar(context, 2),
               ),
-              
-              Divider(),
-          ],
+              Divider(color: Colors.white),
+            ],
+          ),
         ),
       ),
     );
   }
 
-  void _navegar(BuildContext context, int pagina){
+  void _navegar(BuildContext context, int pagina) {
     List<Widget> paginas = [
       DrawerPerfil(),
-      DrawerRedactar(),
+      CorreosAgregar(),
     ];
 
-    final route = MaterialPageRoute(builder: (context){
-      return paginas[pagina-1];
+    final route = MaterialPageRoute(builder: (context) {
+      return paginas[pagina - 1];
     });
 
     Navigator.pop(context);
-    Navigator.push(context,route);
+    Navigator.push(context, route);
   }
 }
