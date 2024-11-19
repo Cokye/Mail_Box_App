@@ -1,12 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:mail_box_app/provider/mail_provider.dart';
 import 'package:mail_box_app/screens/correos_agregar.dart';
+import 'package:mail_box_app/screens/correos_detalles.dart';
 import 'package:mail_box_app/screens/drawer_perfil.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 
-class DrawerScreen extends StatelessWidget {
+class DrawerScreen extends StatefulWidget {
   const DrawerScreen({super.key});
 
   @override
+  State<DrawerScreen> createState() => _DrawerScreenState();
+}
+
+class _DrawerScreenState extends State<DrawerScreen> {
+  MailProvider provider = MailProvider();
+
+  @override
+
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -88,21 +99,77 @@ class DrawerScreen extends StatelessWidget {
             ),
             SizedBox(height: 20),
             Expanded(
-              child: ListView.builder(
-                itemCount: 4,
-                itemBuilder: (context, index) {
-                  return CheckboxListTile(
-                    value: true, // Cambiar a false para desmarcar
-                    onChanged: (value) {},
-                    title: Text(
-                      'Correo',
-                      style: TextStyle(color: Colors.white),
-                    ),
-                    controlAffinity: ListTileControlAffinity.leading,
-                    activeColor: Colors.purple,
+            child: FutureBuilder(
+              future: provider.getMail(),
+              builder: (context, AsyncSnapshot snapshot) {
+                if (!snapshot.hasData || snapshot.connectionState == ConnectionState.waiting) {
+                  return Center(
+                    child: CircularProgressIndicator(),
                   );
-                },
-              ),
+                }
+                return ListView.separated(
+                  separatorBuilder: (_, __) => Divider(),
+                  itemCount: snapshot.data.length,
+                  itemBuilder: (context, index) {
+                    return Slidable(
+                      child: Row(
+                        children: [
+                          Expanded(
+                            flex: 1,
+                            child: Column(
+                              children: [
+                                        IconButton(
+                                          icon: Icon(Icons.mail, color: Colors.orange),
+                                          onPressed: () {
+                                            Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                builder: (context) => CorreosDetalles(
+                                                  //modelo: snapshot.data[index]['modelo'],
+                                                  //patentes: snapshot.data[index]['patentes'],
+                                                  //marca: snapshot.data[index]['marca']['nombre'],
+                                                  //precio: snapshot.data[index]['precio'].toDouble(),
+                                                  //marca_id: snapshot.data[index]['marca_id'],
+
+                                                ),
+                                              ),
+                                            );
+                                          },
+                                        ),
+
+                              ],
+                            ),
+                          ),
+                          Expanded(
+                            flex: 2,
+                            child: Padding(padding: EdgeInsets.only(left: 80),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text('${snapshot.data[index]['correo_remitente']}'),
+                                Text('${snapshot.data[index]['paralelo']}'),
+                              ],
+                            ),
+                            ),
+                          ),
+                          Expanded(
+                            flex: 1,
+                            child: Padding(padding: EdgeInsets.only(right: 30),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.end,
+                              children: [
+                                Text('\$${snapshot.data[index]['paralelo'].toString()}'),
+                              ],
+                            ),
+                            )
+                          ),
+                        ],
+                      ),
+                    );
+                  },
+                );
+              },
+            ),
             ),
           ],
         ),
@@ -179,5 +246,6 @@ class DrawerScreen extends StatelessWidget {
 
     Navigator.pop(context);
     Navigator.push(context, route);
+  
   }
 }

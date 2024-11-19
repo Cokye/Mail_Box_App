@@ -1,27 +1,25 @@
-/* import 'dart:convert';
+import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 class MailProvider{
 
-  final apiURL = 'https://api.gael.cloud/general/public/monedas';
+  final apiURL = 'http://10.0.2.2:8000/api';
 
-  Future<List<dynamic>> getMail()async{
-    var url = Uri.parse(apiURL);
-    var respuesta = await http.get(url);
+  Future<List<dynamic>> getMail() async {
+    var uri = Uri.parse('$apiURL/correo');
+    var respuesta = await http.get(uri);
 
-    if(respuesta.statusCode == 200){
+    if (respuesta.statusCode == 200) {
       return json.decode(respuesta.body);
-    }else{
-      return[];
+    } else {
+      return [];
     }
-  } 
-  #editar
-  Future <double> getValorMoneda(String codigoMail) async {
-    var url = Uri.parse(apiURL + '/'+codigoMail);
-    var respuesta = await http.get(url);
-    var mail = json.decode(respuesta.body);
-    return double.parse(mail['Valor'].replaceAll(',','.'));
-
-
   }
-} */
+
+  Future<bool> mailBorrar(int id) async{
+  var uri = Uri.parse('$apiURL/correos/$id');
+  var respuesta = await http.delete(uri);
+  return respuesta.statusCode==200;
+}
+
+} 
