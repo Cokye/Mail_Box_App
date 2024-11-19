@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mail_box_app/screens/drawer_servicio.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:mail_box_app/provider/mail_provider.dart';
 import 'package:mail_box_app/screens/correos_agregar.dart';
@@ -204,6 +205,12 @@ class _DrawerScreenState extends State<DrawerScreen> {
                 ),
               ),
               ListTile(
+                      leading: Icon(Icons.mail, color: Colors.white),
+                      title: Text('Descripción Servicio', style: TextStyle(color: Colors.white)),
+                      onTap: () => _navegar(context, 3),
+                    ),
+              Divider(color: Colors.white),
+              ListTile(
                 title: Text(
                   'Perfil',
                   style: TextStyle(color: Colors.white),
@@ -227,6 +234,13 @@ class _DrawerScreenState extends State<DrawerScreen> {
                 onTap: () => _navegar(context, 2),
               ),
               Divider(color: Colors.white),
+              
+              ListTile(
+                      leading: Icon(Icons.logout, color: Colors.white),
+                      title: Text('Cerrar Sesión', style: TextStyle(color: Colors.white)),
+                      onTap: () {},
+                    ),
+              Divider(color: Colors.white),
             ],
           ),
         ),
@@ -238,6 +252,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
     List<Widget> paginas = [
       DrawerPerfil(),
       CorreosAgregar(),
+      DrawerServicio(),
     ];
 
     final route = MaterialPageRoute(builder: (context) {
