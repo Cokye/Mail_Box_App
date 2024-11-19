@@ -20,4 +20,6 @@ El login de este proyecto esta hecho con un paquete de flutter y para eso hace f
 
 ### Instalar paquete de slidable
 `$ flutter pub add flutter_slidable`
+### Instalar paquete de linkify
+`flutter pub add flutter_linkify`
 
