@@ -17,3 +17,6 @@ El login de este proyecto esta hecho con un paquete de flutter y para eso hace f
 #### Iconos
 `$ flutter pub add material_symbols_icons`
 
+### Instalar paquete de slidable
+`$ flutter pub add flutter_slidable`
+
