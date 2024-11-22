@@ -98,6 +98,15 @@ class _DrawerScreenState extends State<DrawerScreen> {
                 child: Text('Filtrar'),
               ),
             ),
+
+            const SizedBox(height: 10),
+            const Padding(padding: EdgeInsets.only(left: 2),
+            child: Text(
+              "  Detalles",
+              style: TextStyle(fontSize: 13,fontWeight: FontWeight.bold, color: Colors.tealAccent))
+            ),
+            
+  
             SizedBox(height: 20),
             Expanded(
             child: FutureBuilder(
@@ -113,60 +122,71 @@ class _DrawerScreenState extends State<DrawerScreen> {
                   itemCount: snapshot.data.length,
                   itemBuilder: (context, index) {
                     return Slidable(
-                      child: Row(
-                        children: [
-                          Expanded(
-                            flex: 1,
-                            child: Column(
-                              children: [
-                                        IconButton(
-                                          icon: Icon(Icons.mail, color: Colors.orange),
-                                          onPressed: () {
-                                            Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                builder: (context) => CorreosDetalles(
-                                                  //modelo: snapshot.data[index]['modelo'],
-                                                  //patentes: snapshot.data[index]['patentes'],
-                                                  //marca: snapshot.data[index]['marca']['nombre'],
-                                                  //precio: snapshot.data[index]['precio'].toDouble(),
-                                                  //marca_id: snapshot.data[index]['marca_id'],
-
-                                                ),
-                                              ),
-                                            );
-                                          },
-                                        ),
-
-                              ],
-                            ),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(10),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.black.withOpacity(0.1),
+                                blurRadius: 5,
+                                offset: const Offset(0, 3),
+                              ),
+                            ],
                           ),
-                          Expanded(
-                            flex: 2,
-                            child: Padding(padding: EdgeInsets.only(left: 80),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text('${snapshot.data[index]['correo_remitente']}'),
-                                Text('${snapshot.data[index]['paralelo']}'),
-                              ],
-                            ),
-                            ),
+                          padding: const EdgeInsets.all(15),
+                          child: Row(
+                            children: [
+                              IconButton(
+                                icon: const Icon(Icons.mail, color: Color(0xff3b8d9e)),
+                                onPressed: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => CorreosDetalles(
+                                        id: snapshot.data[index]['id'],
+                                        correo: snapshot.data[index]['correo_remitente'],
+                                        paralelo: snapshot.data[index]['paralelo'],
+                                        ramo: snapshot.data[index]['ramo']['nombre_ramo'],
+                                        info: snapshot.data[index]['informacion'],
+                                          ),
+                                    ),
+                                  );
+                                },
+                              ),
+                              const SizedBox(width: 20),
+                              Expanded(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      '${snapshot.data[index]['correo_remitente']}',
+                                      style: const TextStyle(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                    Text(
+                                      'Paralelo: ${snapshot.data[index]['paralelo']}',
+                                      style: const TextStyle(
+                                        fontSize: 14,
+                                        color: Colors.grey,
+                                      ),
+                                    ),
+                                    Text(
+                                      'Ramo: ${snapshot.data[index]['ramo']['nombre_ramo']}',
+                                      style: const TextStyle(
+                                        fontSize: 14,
+                                        color: Colors.grey,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
                           ),
-                          Expanded(
-                            flex: 1,
-                            child: Padding(padding: EdgeInsets.only(right: 30),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.end,
-                              children: [
-                                Text('\$${snapshot.data[index]['paralelo'].toString()}'),
-                              ],
-                            ),
-                            )
-                          ),
-                        ],
-                      ),
-                    );
+                        ),
+                      );
                   },
                 );
               },

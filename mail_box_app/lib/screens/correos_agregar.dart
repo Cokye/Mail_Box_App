@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mail_box_app/provider/mail_provider.dart';
 
 class CorreosAgregar extends StatefulWidget {
   const CorreosAgregar({super.key});
@@ -10,7 +11,6 @@ class CorreosAgregar extends StatefulWidget {
 class _CorreosAgregarState extends State<CorreosAgregar> {
   TextEditingController correoRCtrl = TextEditingController();
   TextEditingController correoMCtrl = TextEditingController();
-  TextEditingController asuntoCtrl = TextEditingController();
   TextEditingController informacionCtrl = TextEditingController();
   TextEditingController paraleloCtrl = TextEditingController();
   String? ramoSeleccionada; 
@@ -19,12 +19,12 @@ class _CorreosAgregarState extends State<CorreosAgregar> {
   @override
     void initState() {
     super.initState();
-    cargarMarcas(); 
+    cargarRamos(); 
   }
 
-  Future<void> cargarMarcas() async {
-    //AutosProvider provider = AutosProvider();
-    //marcas = await provider.getMarcas();
+  Future<void> cargarRamos() async {
+    MailProvider provider = MailProvider();
+    ramo = await provider.getRamos();
     setState(() {}); 
   }
 
@@ -53,14 +53,6 @@ class _CorreosAgregarState extends State<CorreosAgregar> {
               ),
             ),
             TextField(
-              controller: asuntoCtrl,
-              decoration: InputDecoration(
-                labelText: 'Asunto',
-                hintText: 'Ingrese el asunto',
-              ),
-              keyboardType: TextInputType.number,
-            ),
-            TextField(
               controller: informacionCtrl,
               decoration: InputDecoration(
                 labelText: 'Correo',
@@ -87,7 +79,7 @@ class _CorreosAgregarState extends State<CorreosAgregar> {
               items: ramo.map<DropdownMenuItem<String>>((ramo) {
                 return DropdownMenuItem<String>(
                   value: ramo['id'].toString(), 
-                  child: Text(ramo['nombre']),
+                  child: Text(ramo['nombre_ramo']),
                 );
               }).toList(),
             ),
@@ -98,13 +90,14 @@ class _CorreosAgregarState extends State<CorreosAgregar> {
                 style: ElevatedButton.styleFrom(
                     backgroundColor: Color(0xff3b8d9e)),
                 onPressed: () {
-                  //AutosProvider provider = AutosProvider();
-                  //provider.autosAgregar(
-                    //modeloCtrl.text,
-                    //patenteCtrl.text,
-                    //precioCtrl.text,
-                    //categoriaSeleccionada ?? '', 
-                  //);
+                  MailProvider provider = MailProvider();
+                  provider.mailAgregar(
+                    correoRCtrl.text,
+                    correoMCtrl.text,
+                    informacionCtrl.text ,
+                    paraleloCtrl.text,
+                    ramoSeleccionada ?? '', 
+                  );
                   Navigator.pop(context);
                 },
                 child: Text('Mandar Correo'),
