@@ -17,6 +17,7 @@ class DrawerScreen extends StatefulWidget {
 class _DrawerScreenState extends State<DrawerScreen> {
   MailProvider provider = MailProvider();
 
+void onIconPressed(){}
   @override
 
   Widget build(BuildContext context) {
@@ -195,77 +196,100 @@ class _DrawerScreenState extends State<DrawerScreen> {
           ],
         ),
       ),
-      drawer: Drawer(
-        child: Container(
-          color: Color.fromARGB(200, 59, 142, 158), 
-          child: ListView(
-            children: [
-              DrawerHeader(
-                child: Column(
-                  children: [
-                    Container(
-                      height: 100,
-                      width: 100,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        image: DecorationImage(
-                          image: AssetImage('assets/images/Usuario_perfil.png'),
+      drawer: Row(
+        children: [
+          Drawer(
+            child: Container(
+              color: Color.fromARGB(200, 59, 142, 158), 
+              child: ListView(
+                children: [
+                  DrawerHeader(
+                    child: Column(
+                      children: [
+                        Container(
+                          height: 100,
+                          width: 100,
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            image: DecorationImage(
+                              image: AssetImage('assets/images/Usuario_perfil.png'),
+                            ),
+                            border: Border.all(width: 2.0, color: Color(0xff541643)),
+                          ),
                         ),
-                        border: Border.all(width: 2.0, color: Color(0xff541643)),
-                      ),
+                        Padding(
+                          padding: const EdgeInsets.all(5.0),
+                          child: Text(
+                            "Nombre",
+                            style: TextStyle(fontSize: 17, color: Colors.white),
+                          ),
+                        )
+                      ],
                     ),
-                    Padding(
-                      padding: const EdgeInsets.all(5.0),
-                      child: Text(
-                        "Nombre",
-                        style: TextStyle(fontSize: 17, color: Colors.white),
-                      ),
-                    )
-                  ],
-                ),
-              ),
-              ListTile(
-                      leading: Icon(Icons.mail, color: Colors.white),
-                      title: Text('Descripción Servicio', style: TextStyle(color: Colors.white)),
-                      onTap: () => _navegar(context, 3),
+                  ),
+                  ListTile(
+                          leading: Icon(Icons.mail, color: Colors.white),
+                          title: Text('Descripción Servicio', style: TextStyle(color: Colors.white)),
+                          onTap: () => _navegar(context, 3),
+                        ),
+                  Divider(color: Colors.white),
+                  ListTile(
+                    title: Text(
+                      'Perfil',
+                      style: TextStyle(color: Colors.white),
                     ),
-              Divider(color: Colors.white),
-              ListTile(
-                title: Text(
-                  'Perfil',
-                  style: TextStyle(color: Colors.white),
-                ),
-                leading: Icon(
-                  MdiIcons.faceMan,
-                  color: Colors.white,
-                ),
-                onTap: () => _navegar(context, 1),
-              ),
-              Divider(color: Colors.white),
-              ListTile(
-                title: Text(
-                  'Redactar Correo',
-                  style: TextStyle(color: Colors.white),
-                ),
-                leading: Icon(
-                  MdiIcons.messageDraw,
-                  color: Colors.white,
-                ),
-                onTap: () => _navegar(context, 2),
-              ),
-              Divider(color: Colors.white),
-              
-              ListTile(
-                      leading: Icon(Icons.logout, color: Colors.white),
-                      title: Text('Cerrar Sesión', style: TextStyle(color: Colors.white)),
-                      onTap: () {},
+                    leading: Icon(
+                      MdiIcons.faceMan,
+                      color: Colors.white,
                     ),
-              Divider(color: Colors.white),
-            ],
+                    onTap: () => _navegar(context, 1),
+                  ),
+                  Divider(color: Colors.white),
+                  ListTile(
+                    title: Text(
+                      'Redactar Correo',
+                      style: TextStyle(color: Colors.white),
+                    ),
+                    leading: Icon(
+                      MdiIcons.messageDraw,
+                      color: Colors.white,
+                    ),
+                    onTap: () => _navegar(context, 2),
+                  ),
+                  Divider(color: Colors.white),
+                  
+                ],
+              ),
+            ),
+          
           ),
-        ),
-      ),
-    );
+          Align(
+            alignment: Alignment(0, -0.9),
+            child: Container(
+              decoration: BoxDecoration(
+                      color: Color.fromARGB(199, 90, 168, 183),
+                      borderRadius: BorderRadius.only(
+                        topRight: Radius.circular(10),
+                        bottomRight: Radius.circular(10),
+                      ),
+                    ),
+              width: 35,
+              height: 50,
+              child: IconButton(
+                
+                alignment: Alignment.centerLeft,
+                onPressed: (){
+                  Navigator.pop(context);
+                }, 
+                icon: Icon(Icons.close, color: Colors.white,)) ,
+                
+
+              ),
+            ),
+          ]
+          )
+          );
+      
   }
 
   void _navegar(BuildContext context, int pagina) {

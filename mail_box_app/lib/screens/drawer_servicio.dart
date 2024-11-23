@@ -17,7 +17,8 @@ class DrawerServicio extends StatelessWidget {
       body: Column(
         children: [
           Container(
-            padding: const EdgeInsets.fromLTRB(0, 40.0, 0, 0),
+            alignment: Alignment.bottomLeft,
+            padding: const EdgeInsets.fromLTRB(20, 40.0, 0, 0),
               child: Text('¿Qué es Mail_Box?',
               style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),)
 
@@ -28,7 +29,7 @@ class DrawerServicio extends StatelessWidget {
             style: TextStyle(color: Colors.white),),
           ),
           Container(
-            alignment: Alignment.center,
+            alignment: Alignment.bottomLeft,
             padding: const EdgeInsets.fromLTRB(20, 20.0, 20, 0),
             child: 
             Text('Funcionalidades principales', 
@@ -41,7 +42,7 @@ class DrawerServicio extends StatelessWidget {
             style: TextStyle(color: Colors.white),),
           ),
           Container(
-            alignment: Alignment.center,
+            alignment: Alignment.bottomLeft,
             padding: const EdgeInsets.fromLTRB(20, 10, 20, 0),
             child: Text('Equipo', 
             style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),),
@@ -52,6 +53,11 @@ class DrawerServicio extends StatelessWidget {
             child: Text('\u2022 Felipe Alvarez\n\u2022 Javiera Barrientos\n\u2022 Agustin Fuentes', 
             textAlign: TextAlign.left,
             style: TextStyle(color: Colors.white),),
+          ),
+          Container(
+            alignment: Alignment.bottomLeft,
+            padding: const EdgeInsets.fromLTRB(20, 30, 20, 0),
+            child: Image(image: AssetImage('assets/images/correo.jpeg')),
           ),
         ]
       ),
